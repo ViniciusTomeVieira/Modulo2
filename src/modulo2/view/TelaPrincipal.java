@@ -6,6 +6,7 @@
 package modulo2.view;
 
 import com.sun.glass.events.KeyEvent;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -25,9 +26,12 @@ import javax.swing.KeyStroke;
  */
 public class TelaPrincipal extends JFrame implements ActionListener{
     
+    //Menu superior
     private JMenuBar menuBar1;
-    private JMenu menuArquivo, menuSave;
-    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT;
+    private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes;
+    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo;
+    
+  
     
     public static void main(String[] args) {
         JFrame janela = new TelaPrincipal();
@@ -44,13 +48,17 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         setTitle("Modulo 2");
         setBounds(300,50,500,500);
         getContentPane().setBackground(new Color(0,128,128));
+        getContentPane().setLayout(new BorderLayout());
         
         //Configuração dos menus
         menuBar1 = new JMenuBar();
+        
+        //Menu Arquivo
         menuArquivo = new JMenu("Arquivo");
         menuArquivo.setMnemonic(KeyEvent.VK_A);
         menuArquivo.addActionListener(this);
         menuSave = new JMenu("Salvar");
+        menuSave.setIcon(new ImageIcon("res/save.png"));
         miAbrir = new JMenuItem("Abrir", new ImageIcon("res/open.png"));
         miAbrir.addActionListener(this);
         miAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.ALT_MASK));
@@ -67,19 +75,46 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         miSalvarT.addActionListener(this);
         miSalvarT.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.ALT_MASK));
         miSalvarT.setMnemonic(KeyEvent.VK_N);
+        miExcluir = new JMenuItem("Excluir", new ImageIcon("res/delete.png"));
+        miExcluir.addActionListener(this);
+        miExcluir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.ALT_MASK));
+        miExcluir.setMnemonic(KeyEvent.VK_N);
+        
+        
+        //Menu editar       
+        menuEditar = new JMenu("Editar");
+        miEditarFluxo = new JMenuItem("Fluxo da via", new ImageIcon("res/fluxo.png"));
+        miEditarFluxo.addActionListener(this);
+        miEditarFluxo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.ALT_MASK));
+        miEditarFluxo.setMnemonic(KeyEvent.VK_N);
+        menuEditar.add(miEditarFluxo);
+        
+        //Menu Opções
+        menuOpcoes = new JMenu("Opcoes");
         miSair = new JMenuItem("Sair", new ImageIcon("res/exit.png"));
         miSair.addActionListener(this);
         miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.ALT_MASK));
         miSair.setMnemonic(KeyEvent.VK_N);
+        menuOpcoes.addSeparator(); menuOpcoes.add(miSair);
         
         
-        //Fazendo adições nos menus
+        //Menu Arquivo
         menuSave.add(miSalvar); menuSave.add(miSalvarC);
         menuSave.add(miSalvarT);
         menuArquivo.add(miAbrir); menuArquivo.add(menuSave);
-        menuArquivo.addSeparator(); menuArquivo.add(miSair);
-        menuBar1.add(menuArquivo);
+        menuArquivo.add(miExcluir);
+
+        
+        //Adicionando menus na menuBarSuperior
+        menuBar1.add(menuArquivo); menuBar1.add(menuEditar); menuBar1.add(menuOpcoes);
+        
+        //Seta a menuBar no sistema
         setJMenuBar(menuBar1);
+        
+        
+        //Adicionando menu lateral
+        
+        
         
     }
     //Faz todos os métodos de clique do menu
