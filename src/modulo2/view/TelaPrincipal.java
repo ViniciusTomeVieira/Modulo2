@@ -11,7 +11,9 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -122,7 +125,19 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == miAbrir){
-            JOptionPane.showMessageDialog(rootPane, "Abrir arquivo","Mensagem", JOptionPane.INFORMATION_MESSAGE);
+            JFileChooser fileChooser = new JFileChooser(); // Cria uma janela de selecao de arquivo
+            fileChooser.setDialogTitle("Abrir mapa OSM ou TNTP"); // Titulo da janela
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);  //Seta para somente arquivos         
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivo OSM/TNTP", "osm","tntp"); // Cria o filtro dos arquivos
+            fileChooser.setFileFilter(filter); //Coloca o filtro na janela
+            int retorno = fileChooser.showOpenDialog(this); //Recebe um valor dependendo se ele escolheu ou não um arquivo
+            
+            if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
+                File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
+                System.out.println(file.getPath()); // Imprime o caminho do arquivo
+            }else if(retorno == JFileChooser.CANCEL_OPTION){
+                JOptionPane.showMessageDialog(rootPane, "Nenhum arquivo selecionado","Aviso",JOptionPane.WARNING_MESSAGE);
+            }
         }
         if(e.getSource() == miSalvar){
             JOptionPane.showMessageDialog(rootPane, "Salvar","Mensagem", JOptionPane.INFORMATION_MESSAGE);
