@@ -8,17 +8,21 @@ package modulo2.view;
 import com.sun.glass.events.KeyEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,7 +38,18 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes;
     private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros ;
     
-  
+
+    
+    
+    //MapView
+    private MapView mapView;
+    private JPanel paiMapView;
+
+   
+    
+    
+     
+    
     
     public static void main(String[] args) {
         JFrame janela = new TelaPrincipal();
@@ -129,7 +144,12 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         setJMenuBar(menuBar1);
         
         
-        //Adicionando menu lateral
+        //Adicionando painel principal
+        
+        paiMapView = new JPanel();
+        mapView = new MapView(new ImageIcon("res/mapaDefault.png"),this);
+        paiMapView.add(mapView);
+        getContentPane().add(mapView);
         
         
         
@@ -183,12 +203,17 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             
             if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
                 File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
-                System.out.println(file.getPath()); // Imprime o caminho do arquivo
-                abrirImagem();
+                System.out.println(file.getPath()); // Imprime o caminho do arquivo    
+                mapView.atualizarMapa(new ImageIcon(file.getPath()));
             }else if(retorno == JFileChooser.CANCEL_OPTION){
                 JOptionPane.showMessageDialog(rootPane, "Nenhuma imagem selecionada","Aviso",JOptionPane.WARNING_MESSAGE);
             }
     }
+
+
+
+   
+    
     
     
     
