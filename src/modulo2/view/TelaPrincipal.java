@@ -32,7 +32,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     //Menu superior
     private JMenuBar menuBar1;
     private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes;
-    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo;
+    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros ;
     
   
     
@@ -49,7 +49,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         
         //Configurações da tela principal
         setTitle("Modulo 2");
-        setBounds(300,50,500,500);
+        setBounds(600,95,700,700);
         getContentPane().setBackground(new Color(0,128,128));
         getContentPane().setLayout(new BorderLayout());
         
@@ -86,18 +86,32 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         
         //Menu editar       
         menuEditar = new JMenu("Editar");
+        menuEditar.setMnemonic(KeyEvent.VK_E);
+        menuEditar.addActionListener(this);
         miEditarFluxo = new JMenuItem("Fluxo da via", new ImageIcon("res/fluxo.png"));
         miEditarFluxo.addActionListener(this);
-        miEditarFluxo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.ALT_MASK));
-        miEditarFluxo.setMnemonic(KeyEvent.VK_N);
+        miEditarFluxo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,ActionEvent.ALT_MASK));
+        miEditarFluxo.setMnemonic(KeyEvent.VK_F);
+        miEditarCapacidadeDaVia = new JMenuItem("Capacidade da Via", new ImageIcon("res/fluxo.png"));
+        miEditarCapacidadeDaVia.addActionListener(this);
+        miEditarCapacidadeDaVia.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.ALT_MASK));
+        miEditarCapacidadeDaVia.setMnemonic(KeyEvent.VK_C);
+        miEditarDemandaDeCarros = new JMenuItem("Demanda de carros", new ImageIcon("res/fluxo.png"));
+        miEditarDemandaDeCarros.addActionListener(this);
+        miEditarDemandaDeCarros.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.ALT_MASK));
+        miEditarDemandaDeCarros.setMnemonic(KeyEvent.VK_D);
         menuEditar.add(miEditarFluxo);
+        menuEditar.add(miEditarCapacidadeDaVia);
+        menuEditar.add(miEditarDemandaDeCarros);
         
         //Menu Opções
         menuOpcoes = new JMenu("Opcoes");
+        menuOpcoes.setMnemonic(KeyEvent.VK_O);
+        menuOpcoes.addActionListener(this);
         miSair = new JMenuItem("Sair", new ImageIcon("res/exit.png"));
         miSair.addActionListener(this);
         miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.ALT_MASK));
-        miSair.setMnemonic(KeyEvent.VK_N);
+        miSair.setMnemonic(KeyEvent.VK_X);
         menuOpcoes.addSeparator(); menuOpcoes.add(miSair);
         
         
@@ -125,19 +139,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == miAbrir){
-            JFileChooser fileChooser = new JFileChooser(); // Cria uma janela de selecao de arquivo
-            fileChooser.setDialogTitle("Abrir mapa OSM ou TNTP"); // Titulo da janela
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);  //Seta para somente arquivos         
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivo OSM/TNTP", "osm","tntp"); // Cria o filtro dos arquivos
-            fileChooser.setFileFilter(filter); //Coloca o filtro na janela
-            int retorno = fileChooser.showOpenDialog(this); //Recebe um valor dependendo se ele escolheu ou não um arquivo
-            
-            if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
-                File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
-                System.out.println(file.getPath()); // Imprime o caminho do arquivo
-            }else if(retorno == JFileChooser.CANCEL_OPTION){
-                JOptionPane.showMessageDialog(rootPane, "Nenhum arquivo selecionado","Aviso",JOptionPane.WARNING_MESSAGE);
-            }
+            abrirOsm();          
         }
         if(e.getSource() == miSalvar){
             JOptionPane.showMessageDialog(rootPane, "Salvar","Mensagem", JOptionPane.INFORMATION_MESSAGE);
@@ -152,6 +154,40 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(rootPane, "Saindo do sistema","Mensagem", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
+    }
+    
+    public void abrirOsm(){
+         JFileChooser fileChooser = new JFileChooser(); // Cria uma janela de selecao de arquivo
+            fileChooser.setDialogTitle("Abrir mapa OSM ou TNTP"); // Titulo da janela
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);  //Seta para somente arquivos         
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivo OSM/TNTP", "osm","tntp"); // Cria o filtro dos arquivos
+            fileChooser.setFileFilter(filter); //Coloca o filtro na janela
+            int retorno = fileChooser.showOpenDialog(this); //Recebe um valor dependendo se ele escolheu ou não um arquivo
+            
+            if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
+                File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
+                System.out.println(file.getPath()); // Imprime o caminho do arquivo
+                abrirImagem();
+            }else if(retorno == JFileChooser.CANCEL_OPTION){
+                JOptionPane.showMessageDialog(rootPane, "Nenhum arquivo selecionado","Aviso",JOptionPane.WARNING_MESSAGE);
+            }
+    }
+
+    private void abrirImagem() {
+            JFileChooser fileChooser = new JFileChooser(); // Cria uma janela de selecao de arquivo
+            fileChooser.setDialogTitle("Abrir imagem do mapa"); // Titulo da janela
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);  //Seta para somente arquivos         
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivo PGN/JPEG/SVG", "png","jpeg","svg"); // Cria o filtro dos arquivos
+            fileChooser.setFileFilter(filter); //Coloca o filtro na janela
+            int retorno = fileChooser.showOpenDialog(this); //Recebe um valor dependendo se ele escolheu ou não um arquivo
+            
+            if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
+                File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
+                System.out.println(file.getPath()); // Imprime o caminho do arquivo
+                abrirImagem();
+            }else if(retorno == JFileChooser.CANCEL_OPTION){
+                JOptionPane.showMessageDialog(rootPane, "Nenhuma imagem selecionada","Aviso",JOptionPane.WARNING_MESSAGE);
+            }
     }
     
     
