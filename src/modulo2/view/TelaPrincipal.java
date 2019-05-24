@@ -13,6 +13,8 @@ import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -31,7 +33,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author vinny
  */
-public class TelaPrincipal extends JFrame implements ActionListener{
+public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelListener{
     
     //Menu superior
     private JMenuBar menuBar1;
@@ -57,6 +59,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         //janela.getRootPane().setWindowDecorationStyle(JRootPane.FRAME); // Colocar uma nova decoração
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Saida clicando no "X"
         janela.setVisible(true);
+        janela.setResizable(false);
     }
 
     // Init components
@@ -64,7 +67,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         
         //Configurações da tela principal
         setTitle("Modulo 2");
-        setBounds(600,95,700,700);
+        setBounds(400,95,800,600);
         getContentPane().setBackground(new Color(0,128,128));
         getContentPane().setLayout(new BorderLayout());
         
@@ -148,7 +151,7 @@ public class TelaPrincipal extends JFrame implements ActionListener{
         
         paiMapView = new JPanel();
         mapView = new MapView(new ImageIcon("res/mapaDefault.png"),this);
-        paiMapView.add(mapView);
+        mapView.addMouseWheelListener(this);
         getContentPane().add(mapView);
         
         
@@ -208,6 +211,16 @@ public class TelaPrincipal extends JFrame implements ActionListener{
             }else if(retorno == JFileChooser.CANCEL_OPTION){
                 JOptionPane.showMessageDialog(rootPane, "Nenhuma imagem selecionada","Aviso",JOptionPane.WARNING_MESSAGE);
             }
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if(e.getWheelRotation() < 0){ // pra cima
+            mapView.zoomImage();
+        }else{// pra baixo
+            mapView.zoomOutImage();
+        }
+        
     }
 
 
