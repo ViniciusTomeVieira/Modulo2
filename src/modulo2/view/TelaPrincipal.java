@@ -216,9 +216,12 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         if(e.getWheelRotation() < 0){ // pra cima
-            mapView.zoomImage();
+            //mapView.zoomImage();
+            mapView.adicionarPonto(-49.5400306,-27.0568799 );
+            mapView.adicionarPonto(-49.5397404,-27.0536965 );
+            mapView.adicionarPonto(-49.53459,-27.05563 );
         }else{// pra baixo
-            mapView.zoomOutImage();
+            //mapView.zoomOutImage();
         }
         
     }
