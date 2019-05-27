@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 public class MapView extends JPanel {
     
     private ImageIcon mapa;
+    private ImageIcon background = new ImageIcon("res/background.jpg");
     private ImageObserver obs;
     private List<Image> imagens = new ArrayList<>();
     private List<String> index = new ArrayList<>();
@@ -42,12 +43,16 @@ public class MapView extends JPanel {
     @Override
     public void paint(Graphics g) {
         AffineTransform at = new AffineTransform();
+        g.drawImage(background.getImage(), 0, 0, obs);
         g.drawImage(mapa.getImage(), 0,0, obs);
     }
     
     public void atualizarMapa(ImageIcon mapa){
         this.mapa = mapa;
+        Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
+        this.mapa.setImage(imagemReajustada);
         index.add("+1");
+        imagens.add(mapa.getImage());
         repaint();
     }
     
@@ -66,13 +71,19 @@ public class MapView extends JPanel {
         
     }
     
-    public void zoomOutImage(){
-        if(index.size() > 1){
-            Image imagem = imagens.get(index.size()-2);
+    
+    public void zoomOutImage() {
+        if (index.size() > 1) {
+            Image imagem = imagens.get(index.size() - 2);
             mapa.setImage(imagem);
             index.remove(0);
             redesenharMapa();
-        }             
+        } else if (index.size() == 1) {
+            Image imagem = imagens.get(0);
+            mapa.setImage(imagem);
+            index.remove(0);
+            redesenharMapa();
+        }
     }
     
     public void redesenharMapa(){

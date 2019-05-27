@@ -67,7 +67,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         
         //Configurações da tela principal
         setTitle("Modulo 2");
-        setBounds(400,95,800,600);
+        setBounds(400,95,1000,720);
         getContentPane().setBackground(new Color(0,128,128));
         getContentPane().setLayout(new BorderLayout());
         
