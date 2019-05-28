@@ -40,6 +40,10 @@ public class MapView extends JPanel {
     private List<Node> pontos = new ArrayList<>();
     private int x;
     private int y;
+    private double xMax = -49.5322000; //RIGHT
+    private double xMin = -49.5468000; //LEFT
+    private double yMax = -27.0638000; //BOT
+    private double yMin = -27.0523000; //TOP
 
     public MapView(ImageIcon mapa, ImageObserver observer) {
         this.mapa = mapa;
@@ -105,16 +109,38 @@ public class MapView extends JPanel {
         ImageIcon icon = new ImageIcon("res/PONTO.png");
         Image imagemReajustada = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         icon.setImage(imagemReajustada);
-        int xInteiro = (int)x ;
-        int yInteiro = (int)y ;
-        double xReal = x - xInteiro;
-        double yReal = y - yInteiro; 
-        System.out.println("xReal: " + xReal);
-        System.out.println("yReal: " + yReal);
-        xReal += xReal;
-        yReal += yReal;
-        pontos.add(new Node((xReal*700)/1.25,yReal*4000,icon));
+        descobrirXY(x,y);
+        
+        
+        
+//        int xInteiro = (int)x ;
+//        int yInteiro = (int)y ;
+//        double xReal = x - xInteiro;
+//        double yReal = y - yInteiro; 
+//        System.out.println("xReal: " + xReal);
+//        System.out.println("yReal: " + yReal);
+//        xReal += xReal;
+//        yReal += yReal;
+        
+        pontos.add(new Node(this.x,this.y,icon));
         redesenharMapa();
+    }
+    
+    private void descobrirXY(double x, double y) {
+        // xMAX = 1000    yMAX = 700     Fazer um de cada vez
+    //double x  =  ?
+        
+        //Faz regra de 3 com o valor de x
+        double xMultiplicado = x*1000;
+        double xFinalDouble = xMultiplicado/ this.xMax;
+        this.x = (int) xFinalDouble;
+        
+        //Faz regra de 3 com o valor de x
+        double yMultiplicado = x*700;
+        double yFinalDouble = yMultiplicado/ this.yMax;
+        this.y = (int) yFinalDouble;
+        
+        //https://www.openstreetmap.org/export#map=16/-27.0581/-49.5395
     }
     
     public void redesenharMapa(){
@@ -136,6 +162,7 @@ public class MapView extends JPanel {
     public void setObs(ImageObserver obs) {
         this.obs = obs;
     }
+
     
     
 
