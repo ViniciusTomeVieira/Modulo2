@@ -5,6 +5,7 @@
  */
 package modulo2.view;
 
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -40,10 +41,14 @@ public class MapView extends JPanel {
     private List<Node> pontos = new ArrayList<>();
     private int x;
     private int y;
-    private double xMax = -49.5322000; //RIGHT
-    private double xMin = -49.5468000; //LEFT
-    private double yMax = -27.0638000; //BOT
-    private double yMin = -27.0523000; //TOP
+    private double xMax = 49.5253; //RIGHT
+    private double xMin = 49.5537; //LEFT
+    private double yMax = 27.0663; //BOT
+    private double yMin = 27.0498; //TOP
+    private double xMedia = (xMax + xMin)/2; //Media de largura
+    private double yMedia = (yMax + yMin)/2; //Media de altura
+    private double difX;
+    private double difY;
 
     public MapView(ImageIcon mapa, ImageObserver observer) {
         this.mapa = mapa;
@@ -57,11 +62,11 @@ public class MapView extends JPanel {
         
         if(pontos.size() > 0){
             for(Node nodo: pontos){  
-                x= (int)nodo.getX() * -1;
-                y= (int)nodo.getY() * -1;
+                x= (int)nodo.getX();
+                y= (int)nodo.getY();
                 g2.drawImage(nodo.getImagem().getImage(), x,y, obs);
-                System.out.println("X: " + x);
-                System.out.println("Y: " + y);
+                //System.out.println("X: " + x);
+                //System.out.println("Y: " + y);
             }
         }
     }
@@ -130,16 +135,75 @@ public class MapView extends JPanel {
         // xMAX = 1000    yMAX = 700     Fazer um de cada vez
     //double x  =  ?
         
-        //Faz regra de 3 com o valor de x
-        double xMultiplicado = x*1000;
-        double xFinalDouble = xMultiplicado/ this.xMax;
-        this.x = (int) xFinalDouble;
+    
+        //Conversão para positivo
+        if(x < 0){
+            x = x*-1;
+        }
+        if(y < 0){
+            y = y*-1;
+        }
+        
+        if(x < xMedia){
+            //System.out.println("Diferenca real X: " + (xMedia-x));
+            difX = (xMedia-x)*100000;
+            x*= 500;//Largura da tela/2
+            x/=xMedia;
+            int diferenca = (int)difX;
+            //System.out.println("Diferenca: " + diferenca);
+            this.x = (int)x + diferenca - 10;
+        }else{
+           // System.out.println("Diferenca real X: " + (x-xMedia));
+            difX = (x-xMedia)*100000;
+            x*= 500;//Largura da tela/2
+            x/=xMedia;
+            int diferenca = (int)difX;
+            //System.out.println("Diferenca: " + diferenca);
+            this.x = (int)((int)x - (diferenca/4));
+        }
+
+        if(y < yMedia){
+            System.out.println("Caiu no menor: " + (yMedia-y));
+            difY = (yMedia-y)*100000;
+            y*= 350;//Altura da tela/2
+            y/=yMedia;
+            int diferenca = (int)difY;
+            System.out.println("Diferenca: " + diferenca);
+            this.y = (int)((int)y - (diferenca/2.4));
+            
+        }else{
+            System.out.println("Caiu no maior: " + (y-yMedia));
+            difY = (y-yMedia)*100000;
+            y*= 350; //Altura da tela/2
+            y/=yMedia;
+            int diferenca = (int)difY;
+            System.out.println("Diferenca: " + diferenca);
+            this.y = (int)((int)y + (diferenca/2.4));
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        
+        System.out.println("X: " + this.x);
+        System.out.println("Y: " + this.y);
+            
+        
         
         //Faz regra de 3 com o valor de x
-        double yMultiplicado = x*700;
-        double yFinalDouble = yMultiplicado/ this.yMax;
-        this.y = (int) yFinalDouble;
+        //49.538,27.056
         
+        //      X,Y
+        
+        
+        
+       
         //https://www.openstreetmap.org/export#map=16/-27.0581/-49.5395
     }
     
