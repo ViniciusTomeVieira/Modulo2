@@ -145,40 +145,40 @@ public class MapView extends JPanel {
         }
         
         if(x < xMedia){
-            //System.out.println("Diferenca real X: " + (xMedia-x));
+            System.out.println("Caiu no menor: " + (xMedia-x));
             difX = (xMedia-x)*100000;
             x*= 500;//Largura da tela/2
             x/=xMedia;
             int diferenca = (int)difX;
-            //System.out.println("Diferenca: " + diferenca);
-            this.x = (int)x + diferenca - 10;
+            System.out.println("Diferenca: " + diferenca);
+            this.x = (int)((int)x + (diferenca/2.6) + 75);
         }else{
-           // System.out.println("Diferenca real X: " + (x-xMedia));
+            System.out.println("Caiu no maior: " + (x-xMedia));
             difX = (x-xMedia)*100000;
             x*= 500;//Largura da tela/2
             x/=xMedia;
             int diferenca = (int)difX;
-            //System.out.println("Diferenca: " + diferenca);
-            this.x = (int)((int)x - (diferenca/4));
+            System.out.println("Diferenca: " + diferenca);
+            this.x = (int)((int)x - (diferenca/2.3) + 140);
         }
 
-        if(y < yMedia){
-            System.out.println("Caiu no menor: " + (yMedia-y));
+        if(y < yMedia){ //RESOLVIDO
+            //System.out.println("Caiu no menor: " + (yMedia-y));
             difY = (yMedia-y)*100000;
             y*= 350;//Altura da tela/2
             y/=yMedia;
             int diferenca = (int)difY;
-            System.out.println("Diferenca: " + diferenca);
+            //System.out.println("Diferenca: " + diferenca);
             this.y = (int)((int)y - (diferenca/2.4));
             
         }else{
-            System.out.println("Caiu no maior: " + (y-yMedia));
+            //System.out.println("Caiu no maior: " + (y-yMedia));
             difY = (y-yMedia)*100000;
             y*= 350; //Altura da tela/2
             y/=yMedia;
             int diferenca = (int)difY;
-            System.out.println("Diferenca: " + diferenca);
-            this.y = (int)((int)y + (diferenca/2.4));
+            //System.out.println("Diferenca: " + diferenca);
+            this.y = (int)((int)y + (diferenca/2.2));
         }
         
         

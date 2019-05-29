@@ -223,6 +223,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             mapView.adicionarPonto(-49.5346,-27.0556);
             mapView.adicionarPonto(-49.5441,-27.0537);
             mapView.adicionarPonto(-49.5368,-27.0594);
+            mapView.adicionarPonto(-49.5351,-27.0607); 
             //mapView.adicionarPonto(-49.5397404,-27.0536965 );
            // mapView.adicionarPonto(-49.53459,-27.05563 );
         }else{// pra baixo
