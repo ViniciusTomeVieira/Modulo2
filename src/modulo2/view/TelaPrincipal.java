@@ -13,6 +13,8 @@ import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
@@ -33,7 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author vinny
  */
-public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelListener{
+public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelListener,MouseListener{
     
     //Menu superior
     private JMenuBar menuBar1;
@@ -152,6 +154,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         paiMapView = new JPanel();
         mapView = new MapView(new ImageIcon("res/mapaDefault.png"),this);
         mapView.addMouseWheelListener(this);
+        mapView.addMouseListener(this);
         getContentPane().add(mapView);
         
         
@@ -160,6 +163,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     //Faz todos os métodos de clique do menu
     @Override
     public void actionPerformed(ActionEvent e) {
+
         
         if(e.getSource() == miAbrir){
             abrirOsm();          
@@ -224,12 +228,36 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             mapView.adicionarPonto(-49.5441,-27.0537);
             mapView.adicionarPonto(-49.5368,-27.0594);
             mapView.adicionarPonto(-49.5351,-27.0607); 
-            //mapView.adicionarPonto(-49.5397404,-27.0536965 );
-           // mapView.adicionarPonto(-49.53459,-27.05563 );
+            mapView.adicionarPonto(-49.5361,-27.0523);
         }else{// pra baixo
             //mapView.zoomOutImage();
         }
         
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {        
+        mapView.verificarClique(e.getX(),e.getY());                               
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
 

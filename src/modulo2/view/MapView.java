@@ -24,6 +24,7 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modulo2.model.Node;
 
@@ -71,13 +72,39 @@ public class MapView extends JPanel {
         }
     }
     
-    public void atualizarMapa(ImageIcon mapa){
+    public void verificarClique(int x, int y) {
+        ImageIcon iconAzul = new ImageIcon("res/PONTO_SELECIONADO.png");
+        Image imagemReajustadaAzul = iconAzul.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        ImageIcon iconVerde = new ImageIcon("res/PONTO.png");
+        Image imagemReajustadaVerde = iconVerde.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        for(Node nodo: pontos){
+            if((x > nodo.getX()) && (x < nodo.getX() + 20)){ //Se o mouse clicou no nodo horizontal
+                if((y > nodo.getY()) && (y < nodo.getY() + 20)){ //Se o mouse clicou no nodo vertical
+                    if(!(nodo.getImagem().toString().equals(iconAzul.toString()))){                       
+                        iconAzul.setImage(imagemReajustadaAzul);
+                        nodo.setImagem(iconAzul);
+                    }else{
+                        iconVerde.setImage(imagemReajustadaVerde);
+                        nodo.setImagem(iconVerde);
+                    }
+                }
+            }
+        }
+        redesenharMapa();
+    }
+    
+    public void atualizarMapa(ImageIcon mapa) {
         this.mapa = mapa;
-        Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
-        this.mapa.setImage(imagemReajustada);
-        index.add("+1");
-        imagens.add(mapa.getImage());
-        repaint();
+        if (this.mapa.getImage().getHeight(obs) > 1000 || this.mapa.getImage().getWidth(obs) > 1500) {
+            JOptionPane.showMessageDialog(this, "Arquivo de imagem muito grande!");
+        } else {
+            Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
+            this.mapa.setImage(imagemReajustada);
+            index.add("+1");
+            imagens.add(mapa.getImage());
+            repaint();
+        }
+
     }
     
     public void zoomImage(){
@@ -114,19 +141,7 @@ public class MapView extends JPanel {
         ImageIcon icon = new ImageIcon("res/PONTO.png");
         Image imagemReajustada = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         icon.setImage(imagemReajustada);
-        descobrirXY(x,y);
-        
-        
-        
-//        int xInteiro = (int)x ;
-//        int yInteiro = (int)y ;
-//        double xReal = x - xInteiro;
-//        double yReal = y - yInteiro; 
-//        System.out.println("xReal: " + xReal);
-//        System.out.println("yReal: " + yReal);
-//        xReal += xReal;
-//        yReal += yReal;
-        
+        descobrirXY(x,y);        
         pontos.add(new Node(this.x,this.y,icon));
         redesenharMapa();
     }
@@ -226,6 +241,8 @@ public class MapView extends JPanel {
     public void setObs(ImageObserver obs) {
         this.obs = obs;
     }
+
+    
 
     
     
