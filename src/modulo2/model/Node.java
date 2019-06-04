@@ -12,19 +12,20 @@ import javax.swing.ImageIcon;
  * @author Adroan
  */
 public class Node {
-    private int id;
-    private double x;
-    private double y;
+    private String name;
+    private double latitude;
+    private double longitude;
     private ImageIcon imagem;
 
-    public int getId() {
-        return id;
+    public Node(String name, double latitude, double longitude, ImageIcon imagem) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.imagem = imagem;
     }
 
-    public Node(double x, double y, ImageIcon imagem) {
-        this.x = x;
-        this.y = y;
-        this.imagem = imagem;
+
+    public Node() {
     }
 
     public ImageIcon getImagem() {
@@ -37,25 +38,30 @@ public class Node {
     
     
 
-    public void setId(int id) {
-        this.id = id;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public double getX() {
-        return x;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
     
+    
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     
 }
