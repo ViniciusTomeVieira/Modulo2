@@ -5,19 +5,32 @@
  */
 package modulo2.model.saida;
 
+import modulo2.model.entrada.Osm;
+
 /**
  *
  * @author Adroan
  */
 public class Data {
+        private static Data instance;
+    
+    private Data(){}
+    
+    public static synchronized Data getInstance(){
+        if(instance==null){
+            instance = new Data();
+        }
+        return instance;
+    }
+    private Osm osm;
     
     private Nodes nodes;
     
-    private Connection conection;
+    private Connections connections;
     
-    private Type type;
+    private Types types;
     
-    private Edge edge;
+    private Edges edges;
 
     public Nodes getNodes() {
         return nodes;
@@ -27,28 +40,28 @@ public class Data {
         this.nodes = nodes;
     }
 
-    public Connection getConection() {
-        return conection;
+    public Connections getConnections() {
+        return connections;
     }
 
-    public void setConection(Connection conection) {
-        this.conection = conection;
+    public void setConnections(Connections connections) {
+        this.connections = connections;
     }
 
-    public Type getType() {
-        return type;
+    public Types getTypes() {
+        return types;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypes(Types types) {
+        this.types = types;
     }
 
-    public Edge getEdge() {
-        return edge;
+    public Edges getEdges() {
+        return edges;
     }
 
-    public void setEdge(Edge edge) {
-        this.edge = edge;
+    public void setEdges(Edges edges) {
+        this.edges = edges;
     }
     
     

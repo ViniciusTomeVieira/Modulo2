@@ -30,6 +30,8 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import modulo2.control.Controles;
+import modulo2.control.ConversorES;
 
 /**
  *
@@ -47,6 +49,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     
     //MapView
     private MapView mapView;
+    private Controles controle;
     private JPanel paiMapView;
 
    
@@ -156,6 +159,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         mapView.addMouseWheelListener(this);
         mapView.addMouseListener(this);
         getContentPane().add(mapView);
+        controle = new Controles();
         
         
         
@@ -194,6 +198,9 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
                 File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
                 System.out.println(file.getPath()); // Imprime o caminho do arquivo
+                controle.geraObjeto(file);
+                
+                
                 abrirImagem();
             }else if(retorno == JFileChooser.CANCEL_OPTION){
                 JOptionPane.showMessageDialog(rootPane, "Nenhum arquivo selecionado","Aviso",JOptionPane.WARNING_MESSAGE);

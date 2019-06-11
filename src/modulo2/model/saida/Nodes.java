@@ -24,6 +24,8 @@ public class Nodes {
     public void setNode(List<Node> node) {
         this.node = node;
     }
-    
+    public void addNode(Node node){
+        this.node.add(node);
+    }
     
 }

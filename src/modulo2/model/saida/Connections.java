@@ -12,6 +12,6 @@ import java.util.List;
  *
  * @author Adroan
  */
-public class Conections {
+public class Connections {
     List<Connection> conection = new ArrayList<>();
 }

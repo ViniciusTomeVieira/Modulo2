@@ -6,7 +6,6 @@
 package modulo2.model.saida;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,24 +14,23 @@ import javax.swing.ImageIcon;
  */
 @XStreamAlias(value = "node")
 public class Node {
-    @XStreamAlias(value = "node")
-    @XStreamAsAttribute
     private String id;
-    @XStreamAlias(value = "node")
-    @XStreamAsAttribute
     private double latitude;
     private double longitude;
-    
+    private int x;
+    private int y;
     private ImageIcon imagem;
 
-    public Node(String name, double latitude, double longitude) {
-        this.id = name;
+    public Node(String id, double latitude, double longitude) {
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.imagem =new ImageIcon("res/PONTO.png");;
+        this.imagem =new ImageIcon("res/PONTO.png");
     }
 
 
+
+ 
     public Node() {
     }
 
@@ -71,5 +69,22 @@ public class Node {
     public void setId(String id) {
         this.id = id;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    
     
 }

@@ -15,11 +15,7 @@ import java.util.Random;
  */
 @XStreamAlias(value = "od")
 public class Connection {
-    @XStreamAlias(value = "way")
-    @XStreamAsAttribute
     String id;
-    @XStreamAlias(value = "nd")
-    @XStreamAsAttribute
     String ref;
     
     

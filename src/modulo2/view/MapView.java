@@ -26,6 +26,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modulo2.model.saida.Data;
 import modulo2.model.saida.Node;
 
 /**
@@ -50,6 +51,7 @@ public class MapView extends JPanel {
     private double yMedia = (yMax + yMin)/2; //Media de altura
     private double difX;
     private double difY;
+    private Data data;
 
     public MapView(ImageIcon mapa, ImageObserver observer) {
         this.mapa = mapa;
@@ -142,7 +144,7 @@ public class MapView extends JPanel {
         Image imagemReajustada = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         icon.setImage(imagemReajustada);
         descobrirXY(x,y);        
-        pontos.add(new Node(this.x,this.y,icon));
+//        pontos.add(new Node(this.x,this.y,icon));
         redesenharMapa();
     }
     

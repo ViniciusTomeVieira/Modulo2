@@ -8,18 +8,18 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objetos.Bounds;
-import objetos.Nd;
-import objetos.Node;
-import objetos.Osm;
-import objetos.Tag;
-import objetos.Way;
+import modulo2.model.entrada.Bounds;
+import modulo2.model.entrada.Nd;
+import modulo2.model.entrada.Node;
+import modulo2.model.entrada.Osm;
+import modulo2.model.entrada.Tag;
+import modulo2.model.entrada.Way;
 
 
 /**
  * Classe Main para testes de XML
  * 
- * @author Fábio
+ * @author Fï¿½bio
  */
 public class GeradorXML {
     
@@ -38,7 +38,7 @@ public class GeradorXML {
         
         // A partir de agora vamos gerar um XML a partir do objeto acima => osm
         
-        // Estância de um objeto XStream
+        // Estï¿½ncia de um objeto XStream
         XStream xstream = new XStream(new DomDriver());
         
         // Alias para as tag's 

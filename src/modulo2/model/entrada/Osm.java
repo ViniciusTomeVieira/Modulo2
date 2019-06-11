@@ -13,14 +13,28 @@ import java.util.List;
 @XStreamAlias(value = "osm")
 public class Osm {    
     
+    private static Osm instance;
+    
+    private Osm(){
+        
+    }
+    
+    public static synchronized Osm getInstance(){
+        if(instance==null){
+            instance = new Osm();
+        }
+        return instance;
+    }
     
     private Bounds bounds;
     
     @XStreamImplicit(itemFieldName = "node")
     private List<Node> node ;
     
-    private Way way;
-    
+    @XStreamImplicit(itemFieldName = "way")
+    private List<Way> way;
+    @XStreamImplicit(itemFieldName = "way")
+    private List<Relation> relation;
     
 
     public Bounds getBounds() {
@@ -39,14 +53,15 @@ public class Osm {
         this.node = node;
     }
 
-    public Way getWay() {
+    public List<Way> getWay() {
         return way;
     }
 
-    public void setWay(Way way) {
+    public void setWay(List<Way> way) {
         this.way = way;
     }
-    
+
+
     
     
 }

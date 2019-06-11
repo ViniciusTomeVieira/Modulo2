@@ -25,4 +25,8 @@ public class Edges {
         this.edge = edge;
     }
     
+    public void add(Edge edge){
+        this.edge.add(edge);
+    }
+    
 }

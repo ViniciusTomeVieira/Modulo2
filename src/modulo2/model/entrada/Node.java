@@ -3,6 +3,8 @@ package modulo2.model.entrada;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import java.util.List;
 
 /**
  *
@@ -38,6 +40,8 @@ public class Node {
     @XStreamAsAttribute
     private String id;
 
+    @XStreamImplicit(itemFieldName = "tag")
+    private List<Tag> tag;
     
     
     public String getVersion() {
@@ -111,6 +115,16 @@ public class Node {
     public void setId(String id) {
         this.id = id;
     }
+
+    public List<Tag> getTag() {
+        return tag;
+    }
+
+    public void setTag(List<Tag> tag) {
+        this.tag = tag;
+    }
+    
+    
     
     
 }
