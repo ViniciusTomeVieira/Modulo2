@@ -26,7 +26,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modulo2.model.Node;
+import modulo2.model.saida.Node;
 
 /**
  *

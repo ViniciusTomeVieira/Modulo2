@@ -3,26 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulo2.model;
+package modulo2.model.saida;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import java.util.Random;
 
 /**
  *
  * @author Adroan
  */
+@XStreamAlias(value = "edge")
 public class Edge {
     private final int RAIO_TERRA = 6371;// raio aproximado da terra em km
-    String name;
-    String source;
-    String target;
+    @XStreamAsAttribute
+    String id;
+    @XStreamAlias(value = "nd")
+    @XStreamAsAttribute
+    String ref;
+    String idRef = id+"-"+ref;
+    
+    String source=id;
+    String target=ref;
     Type type;
     String leght;
     String capacity;
     String maxSpeed;
     String constantA;
     String constantB;
+    Random rs = new Random();
 
-    public Edge(String name, String source, String target, Type type, String leght, String capacity, String maxSpeed, String constantA, String constantB) {
-        this.name = name;
+    public Edge(String id, String source, String target, Type type, String leght, String capacity, String maxSpeed, String constantA, String constantB) {
+        this.id = id;
         this.source = source;
         this.target = target;
         this.type = type;
@@ -36,12 +48,12 @@ public class Edge {
     public Edge() {
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSource() {
@@ -122,6 +134,51 @@ public class Edge {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         
         return RAIO_TERRA * c; //<--d
+    }
+    
+    public String gerarCapacidade(){
+        return String.valueOf(rs.nextInt(400));
+    }
+    
+    public String gerarMaxSpeed(){
+        int vel = rs.nextInt(10);
+        String velFim;
+        switch(vel){
+            case 0:
+                velFim = "30";
+                break;
+            case 1:
+                velFim = "40";
+                break;
+            case 2:
+                velFim = "50";
+                break;
+            case 3:
+                velFim = "60";
+                break;
+            case 4:
+                velFim = "70";
+                break;
+            case 5:
+                velFim = "80";
+                break;
+            case 6:
+                velFim = "90";
+                break;
+            case 7:
+                velFim = "100";
+                break;
+            case 8:
+                velFim = "110";
+                break;
+            case 9:
+                velFim = "120";
+                break;
+            default:
+                velFim = "999";
+                break;
+        }
+        return velFim;
     }
     
 }

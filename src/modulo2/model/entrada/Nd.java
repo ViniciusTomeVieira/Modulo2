@@ -1,4 +1,4 @@
-package modulo2.teste;
+package modulo2.model.entrada;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;

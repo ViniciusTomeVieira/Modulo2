@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulo2.teste;
+package modulo2.utils;
 
 /**
  *
  * @author Adroan
  */
-public class Edge {
+public class Conversor {
     
 }

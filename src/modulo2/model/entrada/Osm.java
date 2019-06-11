@@ -1,5 +1,7 @@
-package modulo2.teste;
+package modulo2.model.entrada;
 
+import modulo2.model.entrada.Node;
+import modulo2.model.entrada.Bounds;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import java.util.List;

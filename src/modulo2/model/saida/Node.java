@@ -3,25 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulo2.model;
+package modulo2.model.saida;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Adroan
  */
+@XStreamAlias(value = "node")
 public class Node {
-    private String name;
+    @XStreamAlias(value = "node")
+    @XStreamAsAttribute
+    private String id;
+    @XStreamAlias(value = "node")
+    @XStreamAsAttribute
     private double latitude;
     private double longitude;
+    
     private ImageIcon imagem;
 
-    public Node(String name, double latitude, double longitude, ImageIcon imagem) {
-        this.name = name;
+    public Node(String name, double latitude, double longitude) {
+        this.id = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.imagem = imagem;
+        this.imagem =new ImageIcon("res/PONTO.png");;
     }
 
 
@@ -56,12 +64,12 @@ public class Node {
     
     
     
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
     
 }

@@ -3,18 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulo2.model;
+package modulo2.model.saida;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import java.util.Random;
 
 /**
  *
  * @author Adroan
  */
+@XStreamAlias(value = "od")
 public class Connection {
-    String name;
-    String source;
-    String target;
+    @XStreamAlias(value = "way")
+    @XStreamAsAttribute
+    String id;
+    @XStreamAlias(value = "nd")
+    @XStreamAsAttribute
+    String ref;
+    
+    
+    String source = id;
+    String target = ref;
+    String idRef;
     String flow;
     Random rs = new Random();
 
@@ -22,18 +33,18 @@ public class Connection {
     }
     
     public Connection(String name, String source, String target) {
-        this.name = name;
+        this.idRef = id+"-"+ref;
         this.source = source;
         this.target = target;
-        this.flow = String.valueOf(rs.nextInt(999));
+        this.flow = gerarFlow();
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSource() {
@@ -60,4 +71,7 @@ public class Connection {
         this.flow = flow;
     }
     
+    public String gerarFlow(){
+        return String.valueOf(rs.nextInt(1000));
+    }
 }

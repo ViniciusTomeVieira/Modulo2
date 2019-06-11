@@ -1,19 +1,24 @@
-package modulo2.teste;
+
+package modulo2.model.entrada;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import java.util.List;
 
 /**
  *
  * @author F�bio
  */
-@XStreamAlias(value = "way")
-public class Way {
+@XStreamAlias(value="node")
+public class Node {
     
     @XStreamAsAttribute
     private String version;
+    
+    @XStreamAsAttribute
+    private String lon;
+    
+    @XStreamAsAttribute
+    private String lat;
     
     @XStreamAsAttribute
     private String uid;
@@ -32,19 +37,31 @@ public class Way {
     
     @XStreamAsAttribute
     private String id;
-    
-    @XStreamImplicit(itemFieldName = "nd")
-    private List<Nd> nd;
-    
-    @XStreamImplicit(itemFieldName = "tag")
-    private List<Tag> tag;
 
+    
+    
     public String getVersion() {
         return version;
     }
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
     public String getUid() {
@@ -94,25 +111,6 @@ public class Way {
     public void setId(String id) {
         this.id = id;
     }
-
-    public List<Nd> getNd() {
-        return nd;
-    }
-
-    public void setNd(List<Nd> nd) {
-        this.nd = nd;
-    }
-
-    public List<Tag> getTag() {
-        return tag;
-    }
-
-    public void setTag(List<Tag> tag) {
-        this.tag = tag;
-    }
-
-    
-    
     
     
 }
