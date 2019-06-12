@@ -26,7 +26,7 @@ public class Edge {
     private String oneway;
     private String numLanes;
     private String type;
-    private List<String> target;
+    private String target;
     private String lenght;
     private String capacity;
     private String maxSpeed;
@@ -34,7 +34,7 @@ public class Edge {
     private String constantB;
     Random rs = new Random();
 
-    public Edge(String id, String source, String speed, String oneway, String numLanes, String type, String leght, String capacity, String constantA, String constantB) {
+    public Edge(String id, String source,String target, String speed, String oneway, String numLanes, String type, String leght, String capacity, String constantA, String constantB) {
         this.id = id;
         this.name = source + target;
         this.source = source;
@@ -141,13 +141,15 @@ public class Edge {
         this.type = type;
     }
 
-    public List<String> getTarget() {
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(List<String> target) {
+    public void setTarget(String target) {
         this.target = target;
     }
+
+
 
     public String getLenght() {
         return lenght;
@@ -264,6 +266,6 @@ public class Edge {
     }
 
     public String gerarNumLanes() {
-        return String.valueOf(rs.nextInt(8));
+        return String.valueOf(rs.nextInt(8)+1);
     }
 }

@@ -20,7 +20,15 @@ public class ConversorES {
             data.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
         }
         for(Way way :osm.getWay()){
-           // data.getEdges().add(new Edge(way.getId(), way.getId(), , oneway, numLanes, type, leght, capacity, constantA, constantB));
+            Edge edge = new Edge(way.getId(), way.getId(),null, null, null, null, "2", null, null, null, null);
+                    for(Nd nd:way.getNd()){
+                        edge.addTarget(nd.getRef());
+                    }
+                    for(Tag tag:way.getTag()){
+                        if(tag.getV().equals("yes")&&tag.getK().equals("oneway"))
+                            edge.setOneway("true");
+                    }
+            data.getEdges().add(edge);
         }
         return data;
     }
