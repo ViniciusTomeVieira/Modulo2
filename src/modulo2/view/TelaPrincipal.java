@@ -8,9 +8,6 @@ package modulo2.view;
 import com.sun.glass.events.KeyEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -21,17 +18,14 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modulo2.control.Controles;
-import modulo2.control.ConversorES;
 
 /**
  *
@@ -41,9 +35,11 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     
     //Menu superior
     private JMenuBar menuBar1;
-    private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes;
-    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros ;
+    private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes, menuExporta;
+    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros, miExportaMacro, miExportaMicro;
     
+    
+	
 
     
     
@@ -85,6 +81,8 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         menuArquivo.addActionListener(this);
         menuSave = new JMenu("Salvar");
         menuSave.setIcon(new ImageIcon("res/save.png"));
+        menuExporta = new JMenu("Exportar");
+        menuExporta.setIcon(new ImageIcon("res/export.png"));
         miAbrir = new JMenuItem("Abrir", new ImageIcon("res/open.png"));
         miAbrir.addActionListener(this);
         miAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.ALT_MASK));
@@ -101,6 +99,14 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         miSalvarT.addActionListener(this);
         miSalvarT.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.ALT_MASK));
         miSalvarT.setMnemonic(KeyEvent.VK_N);
+        miExportaMacro = new JMenuItem("Simulação macroscópica");
+	miExportaMacro.addActionListener(this);
+	miExportaMacro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.ALT_MASK));
+	miExportaMacro.setMnemonic(KeyEvent.VK_N);     
+	miExportaMicro = new JMenuItem("Simulação microscópica");
+	miExportaMicro.addActionListener(this);
+	miExportaMicro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,ActionEvent.ALT_MASK));
+	miExportaMicro.setMnemonic(KeyEvent.VK_N);  
         miExcluir = new JMenuItem("Excluir", new ImageIcon("res/delete.png"));
         miExcluir.addActionListener(this);
         miExcluir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,ActionEvent.ALT_MASK));
@@ -142,6 +148,8 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         menuSave.add(miSalvar); menuSave.add(miSalvarC);
         menuSave.add(miSalvarT);
         menuArquivo.add(miAbrir); menuArquivo.add(menuSave);
+        menuArquivo.add(menuExporta); 
+        menuExporta.add(miExportaMacro); menuExporta.add(miExportaMicro);
         menuArquivo.add(miExcluir);
 
         
@@ -181,6 +189,12 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         if(e.getSource() == miSalvarT){
             JOptionPane.showMessageDialog(rootPane, "Salvar tudo","Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }
+        if(e.getSource() == miExportaMacro){
+            exportaMacro();
+	}        
+	if(e.getSource() == miExportaMicro){
+            exportaMicro();
+	}
         if(e.getSource() == miSair){
             JOptionPane.showMessageDialog(rootPane, "Saindo do sistema","Mensagem", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
@@ -224,6 +238,14 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             }
     }
 
+    private void exportaMacro(){
+        controle.geraXmlMacro();
+    }
+
+    private void exportaMicro(){
+        controle.geraXmlMicro();
+    }
+    
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         if(e.getWheelRotation() < 0){ // pra cima

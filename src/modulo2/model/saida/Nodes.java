@@ -8,7 +8,7 @@ package modulo2.model.saida;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import java.util.ArrayList;
 import java.util.List;
-
+import modulo2.model.entrada.Node;
 /**
  *
  * @author Adroan
@@ -17,14 +17,14 @@ public class Nodes {
     @XStreamImplicit(itemFieldName = "node")
     List<Node> node = new ArrayList<>();
 
-    public List<Node> getNode() {
+    public List<Node> getNodes() {
         return node;
     }
 
-    public void setNode(List<Node> node) {
+    public void setNodes(List<Node> node) {
         this.node = node;
     }
-    public void addNode(Node node){
+    public void addNodes(Node node){
         this.node.add(node);
     }
     

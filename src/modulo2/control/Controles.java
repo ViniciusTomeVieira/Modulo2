@@ -12,9 +12,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modulo2.model.entrada.Node;
 import modulo2.model.entrada.Osm;
 import modulo2.model.saida.Data;
+import modulo2.model.saida.Nodes;
 import principal.GeradorXML;
 
 /**
@@ -53,6 +55,30 @@ public class Controles {
             Logger.getLogger(GeradorXML.class.getName()).log(Level.SEVERE, null, ex);
         }
         data= converterES.converterES(osm,data);
+    }
+    
+    public void geraXmlMacro(){
+        Node node =  new Node();
+        node.setId("1");
+        
+        Nodes nodes = new Nodes();
+        nodes.addNodes(node);
+        
+        String msg = node.getId();
+        System.out.println(msg);
+        
+        XStream stream = new XStream(new DomDriver());
+        stream.alias("name", Node.class);
+        
+        String xml = stream.toXML(node);
+        
+        System.out.println("<?xml versio=\"1.0\"?>");
+        System.out.println(xml);
+        
+        
+    }
+    public void geraXmlMicro(){
+        JOptionPane.showMessageDialog(null, "XML Micro");
     }
     
 }
