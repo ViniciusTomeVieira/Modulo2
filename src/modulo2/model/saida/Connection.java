@@ -7,6 +7,7 @@ package modulo2.model.saida;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,10 +26,8 @@ public class Connection {
     String flow;
     Random rs = new Random();
 
-    public Connection() {
-    }
     
-    public Connection(String name, String source, String target) {
+    public Connection(String source, String target) {
         this.idRef = id+"-"+ref;
         this.source = source;
         this.target = target;

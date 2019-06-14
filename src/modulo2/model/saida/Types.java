@@ -25,4 +25,8 @@ public class Types {
         this.type = type;
     }
     
+    public void add(Type type){
+        this.type.add(type);
+    }
+    
 }

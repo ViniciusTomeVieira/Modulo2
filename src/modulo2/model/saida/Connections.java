@@ -13,5 +13,17 @@ import java.util.List;
  * @author Adroan
  */
 public class Connections {
-    List<Connection> conection = new ArrayList<>();
+    List<Connection> connection = new ArrayList<>();
+
+    public List<Connection> getConnection() {
+        return connection;
+    }
+
+    public void setConnection(List<Connection> connection) {
+        this.connection = connection;
+    }
+    
+    public void add(Connection  connection){
+        this.connection.add(connection);
+    }
 }

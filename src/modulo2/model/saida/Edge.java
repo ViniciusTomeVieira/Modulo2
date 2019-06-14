@@ -26,26 +26,30 @@ public class Edge {
     private String oneway;
     private String numLanes;
     private String type;
-    private List<String> target;
+    private String target;
     private String lenght;
     private String capacity;
     private String maxSpeed;
     private String constantA;
     private String constantB;
+    private double iniLat;
+    private double iniLon;
+    private double FimLat;
+    private double FimLon;
     Random rs = new Random();
 
-    public Edge(String id, String source, String speed, String oneway, String numLanes, String type, String leght, String capacity, String constantA, String constantB) {
+    public Edge(String id, String source,String target, String speed, String oneway, String numLanes, String type, String capacity, String constantA, String constantB,double iniLat,double iniLon, double FimLat, double FimLon) {
         this.id = id;
         this.name = source + target;
         this.source = source;
         if (speed == null) {
-            this.speed = gerarMaxSpeed();
+            this.speed = speed;
         } else {
             this.speed = speed;
         }
 
         if (oneway == null) {
-            if (rs.nextInt(1) == 0) {
+            if (rs.nextInt(20) != 0) {
                 this.oneway = "true";
             } else {
                 this.oneway = "false";
@@ -64,7 +68,7 @@ public class Edge {
             this.type = type;
         }
         this.type = type;
-        this.lenght = lenght;//fazer o calculo da distancia
+        this.lenght = String.valueOf(distance(iniLat, iniLon, FimLat, FimLon));//fazer o calculo da distancia
         if (capacity == null) {
             this.capacity = gerarCapacidade();
         } else {
@@ -141,11 +145,11 @@ public class Edge {
         this.type = type;
     }
 
-    public List<String> getTarget() {
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(List<String> target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
@@ -194,8 +198,8 @@ public class Edge {
     private double haversine(double val) {
         return Math.pow(Math.sin(val / 2), 2);
     }
-
-    public double distance(double iniLat, double iniLong, double fimLat, double fimLong) {
+    
+    private double distance(double iniLat, double iniLong, double fimLat, double fimLong) {
         double dLat = Math.toRadians((fimLat - iniLat));
         double dLong = Math.toRadians((fimLong - iniLong));
 
@@ -266,4 +270,10 @@ public class Edge {
     public String gerarNumLanes() {
         return String.valueOf(rs.nextInt(8));
     }
+    
+    public String gerarType(){
+        return String.valueOf(rs.nextInt(10)+1);
+    }
+    
+    
 }
