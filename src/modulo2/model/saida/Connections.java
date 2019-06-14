@@ -5,7 +5,6 @@
  */
 package modulo2.model.saida;
 
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +13,17 @@ import java.util.List;
  * @author Adroan
  */
 public class Connections {
-    @XStreamImplicit(itemFieldName = "connections")
-    List<Connection> conection = new ArrayList<>();
-    
+    List<Connection> connection = new ArrayList<>();
+
     public List<Connection> getConnection() {
-        return conection;
+        return connection;
     }
 
-    public void setConection(List<Connection> conection) {
-        this.conection = conection;
+    public void setConnection(List<Connection> connection) {
+        this.connection = connection;
     }
     
-    public void add(Connection od){
-        this.conection.add(od);
-        
+    public void add(Connection  connection){
+        this.connection.add(connection);
     }
 }
