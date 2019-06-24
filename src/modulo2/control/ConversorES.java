@@ -48,25 +48,26 @@ public class ConversorES {
         }
         for (Way way : osm.getWay()) {
             for (Nd nd : way.getNd()) {
-                for (modulo2.model.saida.Node node : data.getNodes().getNode()) {
+                for (Node node : osm.getNode()) {
                     if (way.getId().equals(node.getId())) {
-                        iniLat = node.getLatitude();
-                        iniLon = node.getLongitude();
+                        
+                        iniLat = Double.parseDouble(node.getLat());
+                        iniLon = Double.parseDouble(node.getLon());
                     }
                     if (nd.getRef().equals(node.getId())) {
-                        FimLat = node.getLatitude();
-                        FimLon = node.getLongitude();
+                        FimLat = Double.parseDouble(node.getLat());
+                        FimLon = Double.parseDouble(node.getLon());
                     }
                 }
                 data.getEdges().add(new Edge(way.getId(), way.getId(), nd.getRef(), speed, oneWay, numLanes, type, capacidade, constA,constB, iniLat, iniLon, FimLat, FimLon));
             }
         }
-        for (Edge edge:data.getEdges().getEdge()) {
-            data.getTypes().add(new Type(speed, speed, oneWay, numLanes, capacidade));
+        for (Way way : osm.getWay()) {
+            data.getTypes().add(new Type(way.getId(), speed, oneWay, numLanes, capacidade));
         }
 
-        for (modulo2.model.saida.Node node : data.getNodes().getNode()) {
-            for (modulo2.model.saida.Node node2 : data.getNodes().getNode()) {
+        for (Node node : osm.getNode()) {
+            for (Node node2 : osm.getNode()) {
                 data.getConnections().add(new Connection(node.getId(),node2.getId()));
             }
         }
