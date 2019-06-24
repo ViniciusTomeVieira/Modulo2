@@ -196,8 +196,16 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             System.exit(0);
         }
         if(e.getSource()==miEditarCapacidadeDaVia){
-            double  via = Double.parseDouble(JOptionPane.showInputDialog(rootPane,"Digite a nova capacidade da via:"));
-            
+            mapView.alterarDados("Capacidade",JOptionPane.showInputDialog(rootPane,"Digite a nova capacidade da via:"));          
+        }
+        if(e.getSource()==miEditarFluxo){
+            mapView.alterarDados("Fluxo",JOptionPane.showInputDialog(rootPane,"Digite o novo fluxo da via:"));          
+        }
+        if(e.getSource()==miEditarDemandaDeCarros){
+            mapView.alterarDados("Demanda",JOptionPane.showInputDialog(rootPane,"Digite a nova demanda da via:"));          
+        }
+        if(e.getSource()==miEditarVelocidade){
+            mapView.alterarDados("Velocidade",JOptionPane.showInputDialog(rootPane,"Digite a nova velocidade da via:"));          
         }
     }
     

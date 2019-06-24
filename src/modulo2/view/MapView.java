@@ -26,8 +26,12 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modulo2.model.saida.Connection;
 import modulo2.model.saida.Data;
+import modulo2.model.saida.Edge;
+import modulo2.model.saida.Edges;
 import modulo2.model.saida.Node;
+import modulo2.model.saida.Type;
 
 /**
  *
@@ -53,6 +57,7 @@ public class MapView extends JPanel {
     private double difY;
     private Data data;
     private boolean desenhar = true;
+    private int indexModificar = -1;
 
     public MapView(ImageIcon mapa, ImageObserver observer) {
         this.mapa = mapa;
@@ -108,6 +113,7 @@ public class MapView extends JPanel {
                     if(!(nodo.getImagem().toString().equals(iconAzul.toString()))){                       
                         iconAzul.setImage(imagemReajustadaAzul);
                         nodo.setImagem(iconAzul);
+                        indexModificar = Integer.parseInt(nodo.getId());
                     }else{
                         iconVerde.setImage(imagemReajustadaVerde);
                         nodo.setImagem(iconVerde);
@@ -117,6 +123,15 @@ public class MapView extends JPanel {
         }
         desenhar = true;
         redesenharMapa();
+    }
+    
+    public void alterarDados(String dadoParaAlterar, String valor){
+        switch(dadoParaAlterar){
+            case "Fluxo": alterarFluxo(valor); break;
+            case "Capacidade": alterarCapacidade(valor);break;
+            case "Demanda": alterarDemanda(valor);break;
+            case "Velocidade": alterarVelocidade(valor);break;
+        }
     }
     
     public void atualizarMapa(ImageIcon mapa) {
@@ -306,16 +321,54 @@ public class MapView extends JPanel {
         this.obs = obs;
     }
 
-    
+    private void alterarFluxo(String valor) {
+        if(indexModificar != -1){
+       List<Connection> connections =data.getConnections().getConnection();
+        for (Connection connection : connections) {
+            if(connection.getSource().equals(indexModificar)){
+                connection.setFlow(valor);
+            }
+        }
+        }
+    }
 
-    
-    
+    private void alterarCapacidade(String valor) {
+         if(indexModificar != -1){
+      List<Edge> edges = data.getEdges().getEdge();
+      for(Edge edge : edges){
+          if(edge.getId().equals(indexModificar)){
+              edge.setCapacity(valor);
+          }
+      }
+         }
+    }
 
-    
+    private void alterarDemanda(String valor) {
+         if(indexModificar != -1){
+       List<Type> types = data.getTypes().getType();
+       for(Type type : types){
+           if(type.getId().equals(indexModificar)){
+               type.setCapacity(valor);
+           }
+       }
+         }
+    }
 
-    
+    private void alterarVelocidade(String valor) {
+         if(indexModificar != -1){
+        List<Type> types = data.getTypes().getType();
+        List<Edge> edges = data.getEdges().getEdge();
+        for(Type type : types){
+           if(type.getId().equals(indexModificar)){
+               type.setSpeed(valor);
+           }
+       }
+        for (Edge edge : edges) {
+            if(edge.getId().equals(indexModificar)){
+                edge.setSpeed(valor);
+            }
+        }
+         }
+    }
 
-    
-    
-    
 }
