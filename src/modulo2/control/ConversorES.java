@@ -30,6 +30,8 @@ public class ConversorES {
     private String capacidade="";
     private String constA="";
     private String constB="";
+    private Data data;
+    private Osm osm;
             
             
     private Random rs =new Random();
@@ -42,13 +44,15 @@ public class ConversorES {
         capacidade =gerarCapacidade();
         constA =geradordeConstanteA();
         constB =geradordeConstanteB();
+        this.data =data;
+        this.osm=osm;
 
-        for (Node node : osm.getNode()) {
-            data.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
+        for (Node node : this.osm.getNode()) {
+            this.data.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
         }
-        for (Way way : osm.getWay()) {
+        for (Way way : this.osm.getWay()) {
             for (Nd nd : way.getNd()) {
-                for (Node node : osm.getNode()) {
+                for (Node node : this.osm.getNode()) {
                     if (way.getId().equals(node.getId())) {
                         
                         iniLat = Double.parseDouble(node.getLat());
@@ -59,19 +63,19 @@ public class ConversorES {
                         FimLon = Double.parseDouble(node.getLon());
                     }
                 }
-                data.getEdges().add(new Edge(way.getId(), way.getId(), nd.getRef(), speed, oneWay, numLanes, type, capacidade, constA,constB, iniLat, iniLon, FimLat, FimLon));
+                this.data.getEdges().add(new Edge(way.getId(), way.getId(), nd.getRef(), speed, oneWay, numLanes, type, capacidade, constA,constB, iniLat, iniLon, FimLat, FimLon));
             }
         }
-        for (Way way : osm.getWay()) {
-            data.getTypes().add(new Type(way.getId(), speed, oneWay, numLanes, capacidade));
+        for (Way way : this.osm.getWay()) {
+            this.data.getTypes().add(new Type(way.getId(), speed, oneWay, numLanes, capacidade));
         }
 
-        for (Node node : osm.getNode()) {
-            for (Node node2 : osm.getNode()) {
-                data.getConnections().add(new Connection(node.getId(),node2.getId()));
+        for (Node node : this.osm.getNode()) {
+            for (Node node2 : this.osm.getNode()) {
+                this.data.getConnections().add(new Connection(node.getId(),node2.getId()));
             }
         }
-        return data;
+        return this.data;
     }
         public String gerarCapacidade() {
         return String.valueOf(rs.nextInt(400));
