@@ -61,11 +61,7 @@ public class Controles {
             System.out.println("Bounds.minlat: " + osm.getBounds().getMinlat());
             
             System.out.println("Nodes");
-            for(Node node: osm.getNode()) {
-                System.out.println("Version: "+ node.getVersion());
-                System.out.println("Id: "+ node.getId());
-                System.out.println("------------------");
-            }
+            
                 
             
         } catch (FileNotFoundException ex) {

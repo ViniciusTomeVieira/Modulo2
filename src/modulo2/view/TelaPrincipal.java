@@ -231,7 +231,8 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
             
             if(retorno == JFileChooser.APPROVE_OPTION){ //Se abriu realmente um arquivo
                 File file = fileChooser.getSelectedFile(); // Recebe o arquivo selecionado
-                System.out.println(file.getPath()); // Imprime o caminho do arquivo    
+                System.out.println(file.getPath()); // Imprime o caminho do arquivo 
+                mapView.popularDados();
                 mapView.atualizarMapa(new ImageIcon(file.getPath()));
             }else if(retorno == JFileChooser.CANCEL_OPTION){
                 JOptionPane.showMessageDialog(rootPane, "Nenhuma imagem selecionada","Aviso",JOptionPane.WARNING_MESSAGE);

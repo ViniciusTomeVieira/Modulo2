@@ -57,6 +57,12 @@ public class MapView extends JPanel {
         this.mapa = mapa;
         this.obs = observer;
     }
+    
+    public void popularDados(){
+        this.data = Data.getInstance();
+        pontos = data.getNodes().getNode();
+        //this.xMax = data.g   fazer
+    }
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -64,7 +70,8 @@ public class MapView extends JPanel {
         g2.drawImage(mapa.getImage(), 0,0, obs);
         
         if(pontos.size() > 0){
-            for(Node nodo: pontos){  
+            for(Node nodo: pontos){ 
+                adicionarPonto(nodo.getLongitude(), nodo.getLatitude());
                 x= (int)nodo.getX();
                 y= (int)nodo.getY();
                 g2.drawImage(nodo.getImagem().getImage(), x,y, obs);
@@ -99,6 +106,11 @@ public class MapView extends JPanel {
         this.mapa = mapa;
         if (this.mapa.getImage().getHeight(obs) > 1000 || this.mapa.getImage().getWidth(obs) > 1500) {
             JOptionPane.showMessageDialog(this, "Arquivo de imagem muito grande!");
+            Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
+            this.mapa.setImage(imagemReajustada);
+            index.add("+1");
+            imagens.add(mapa.getImage());
+            repaint();
         } else {
             Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
             this.mapa.setImage(imagemReajustada);
