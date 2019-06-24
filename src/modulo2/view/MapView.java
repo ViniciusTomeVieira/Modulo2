@@ -43,15 +43,16 @@ public class MapView extends JPanel {
     private List<Node> pontos = new ArrayList<>();
     private int x;
     private int y;
-    private double xMax = 49.5253; //RIGHT
-    private double xMin = 49.5537; //LEFT
-    private double yMax = 27.0663; //BOT
-    private double yMin = 27.0498; //TOP
-    private double xMedia = (xMax + xMin)/2; //Media de largura
-    private double yMedia = (yMax + yMin)/2; //Media de altura
+    private double xMax; //RIGHT
+    private double xMin; //LEFT
+    private double yMax; //BOT
+    private double yMin; //TOP
+    private double xMedia; //Media de largura
+    private double yMedia; //Media de altura
     private double difX;
     private double difY;
     private Data data;
+    private boolean desenhar = true;
 
     public MapView(ImageIcon mapa, ImageObserver observer) {
         this.mapa = mapa;
@@ -61,7 +62,12 @@ public class MapView extends JPanel {
     public void popularDados(){
         this.data = Data.getInstance();
         pontos = data.getNodes().getNode();
-        //this.xMax = data.g   fazer
+        this.xMax = data.getxMax();
+        this.xMin = data.getxMin();
+        this.yMax = data.getyMax();
+        this.yMin = data.getyMin();
+        this.yMedia = (yMax + yMin)/2;
+        this.xMedia = (xMax + xMin)/2;
     }
     @Override
     public void paint(Graphics g) {
@@ -70,16 +76,26 @@ public class MapView extends JPanel {
         g2.drawImage(mapa.getImage(), 0,0, obs);
         
         if(pontos.size() > 0){
-            for(Node nodo: pontos){ 
+            if(desenhar){
+
+
+
+            for(Node nodo: pontos){
+                
                 adicionarPonto(nodo.getLongitude(), nodo.getLatitude());
-                x= (int)nodo.getX();
-                y= (int)nodo.getY();
-                g2.drawImage(nodo.getImagem().getImage(), x,y, obs);
+                nodo.setX(this.x);
+                nodo.setY(this.y);
+                g2.drawImage(nodo.getImagem().getImage(), nodo.getX(),nodo.getY(), obs);
                 //System.out.println("X: " + x);
                 //System.out.println("Y: " + y);
             }
+            desenhar = false;
+            
+            }
+            }
+
         }
-    }
+    
     
     public void verificarClique(int x, int y) {
         ImageIcon iconAzul = new ImageIcon("res/PONTO_SELECIONADO.png");
@@ -99,13 +115,13 @@ public class MapView extends JPanel {
                 }
             }
         }
+        desenhar = true;
         redesenharMapa();
     }
     
     public void atualizarMapa(ImageIcon mapa) {
         this.mapa = mapa;
-        if (this.mapa.getImage().getHeight(obs) > 1000 || this.mapa.getImage().getWidth(obs) > 1500) {
-            JOptionPane.showMessageDialog(this, "Arquivo de imagem muito grande!");
+        if (this.mapa.getImage().getHeight(obs) > 1000 || this.mapa.getImage().getWidth(obs) > 1500) {        
             Image imagemReajustada = this.mapa.getImage().getScaledInstance(1000, 720, Image.SCALE_DEFAULT);
             this.mapa.setImage(imagemReajustada);
             index.add("+1");
@@ -157,7 +173,6 @@ public class MapView extends JPanel {
         icon.setImage(imagemReajustada);
         descobrirXY(x,y);        
 //        pontos.add(new Node(this.x,this.y,icon));
-        redesenharMapa();
     }
     
     private void descobrirXY(double x, double y) {
@@ -174,21 +189,21 @@ public class MapView extends JPanel {
         }
         
         if(x < xMedia){
-            System.out.println("Caiu no menor: " + (xMedia-x));
+            //System.out.println("Caiu no menor: " + (xMedia-x));
             difX = (xMedia-x)*100000;
             x*= 500;//Largura da tela/2
             x/=xMedia;
             int diferenca = (int)difX;
-            System.out.println("Diferenca: " + diferenca);
-            this.x = (int)((int)x + (diferenca/2.6) + 75);
+            //System.out.println("Diferenca: " + diferenca);
+            this.x = (int)((int)x + (diferenca/2.9));
         }else{
-            System.out.println("Caiu no maior: " + (x-xMedia));
+            //System.out.println("Caiu no maior: " + (x-xMedia));
             difX = (x-xMedia)*100000;
             x*= 500;//Largura da tela/2
             x/=xMedia;
             int diferenca = (int)difX;
-            System.out.println("Diferenca: " + diferenca);
-            this.x = (int)((int)x - (diferenca/2.3) + 140);
+            //System.out.println("Diferenca: " + diferenca);
+            this.x = (int)((int)x - (diferenca/2.6));
         }
 
         if(y < yMedia){ //RESOLVIDO
@@ -198,7 +213,7 @@ public class MapView extends JPanel {
             y/=yMedia;
             int diferenca = (int)difY;
             //System.out.println("Diferenca: " + diferenca);
-            this.y = (int)((int)y - (diferenca/2.4));
+            this.y = (int)((int)y - (diferenca/2));
             
         }else{
             //System.out.println("Caiu no maior: " + (y-yMedia));
@@ -207,7 +222,7 @@ public class MapView extends JPanel {
             y/=yMedia;
             int diferenca = (int)difY;
             //System.out.println("Diferenca: " + diferenca);
-            this.y = (int)((int)y + (diferenca/2.2));
+            this.y = (int)((int)y + (diferenca/2));
         }
         
         
@@ -220,10 +235,45 @@ public class MapView extends JPanel {
         
        
         
-        System.out.println("X: " + this.x);
-        System.out.println("Y: " + this.y);
+        //System.out.println("X: " + this.x);
+        //System.out.println("Y: " + this.y);
             
-        
+//         if(x < xMedia){
+//            System.out.println("Caiu no menor: " + (xMedia-x));
+//            difX = (xMedia-x)*100000;
+//            x*= 500;//Largura da tela/2
+//            x/=xMedia;
+//            int diferenca = (int)difX;
+//            System.out.println("Diferenca: " + diferenca);
+//            this.x = (int)((int)x + (diferenca/2.6) + 75);
+//        }else{
+//            System.out.println("Caiu no maior: " + (x-xMedia));
+//            difX = (x-xMedia)*100000;
+//            x*= 500;//Largura da tela/2
+//            x/=xMedia;
+//            int diferenca = (int)difX;
+//            System.out.println("Diferenca: " + diferenca);
+//            this.x = (int)((int)x - (diferenca/2.6) + 140);
+//        }
+//
+//        if(y < yMedia){ //RESOLVIDO
+//            //System.out.println("Caiu no menor: " + (yMedia-y));
+//            difY = (yMedia-y)*100000;
+//            y*= 350;//Altura da tela/2
+//            y/=yMedia;
+//            int diferenca = (int)difY;
+//            //System.out.println("Diferenca: " + diferenca);
+//            this.y = (int)((int)y - (diferenca/2.4));
+//            
+//        }else{
+//            //System.out.println("Caiu no maior: " + (y-yMedia));
+//            difY = (y-yMedia)*100000;
+//            y*= 350; //Altura da tela/2
+//            y/=yMedia;
+//            int diferenca = (int)difY;
+//            //System.out.println("Diferenca: " + diferenca);
+//            this.y = (int)((int)y + (diferenca/2.2));
+//        }
         
         //Faz regra de 3 com o valor de x
         //49.538,27.056

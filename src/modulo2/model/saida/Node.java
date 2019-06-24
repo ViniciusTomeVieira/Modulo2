@@ -6,6 +6,7 @@
 package modulo2.model.saida;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,6 +27,8 @@ public class Node {
         this.latitude = latitude;
         this.longitude = longitude;
         this.imagem =new ImageIcon("res/PONTO.png");
+        Image imagemReajustada = imagem.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        imagem.setImage(imagemReajustada);
     }
 
 
