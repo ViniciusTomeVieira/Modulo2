@@ -52,7 +52,7 @@ public class Controles {
             FileReader ler = new FileReader(file);
             XStream xstream = new XStream(new DomDriver());
             Class<?>[] classes = new Class[]{Bounds.class, Member.class, Nd.class, Node.class, Osm.class, Relation.class, Tag.class, Way.class};
-            xstream.setupDefaultSecurity(xstream);
+            XStream.setupDefaultSecurity(xstream);
             xstream.allowTypes(classes);
             xstream.autodetectAnnotations(true);
 

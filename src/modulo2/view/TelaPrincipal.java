@@ -36,7 +36,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     //Menu superior
     private JMenuBar menuBar1;
     private JMenu menuArquivo, menuSave, menuEditar, menuOpcoes, menuExporta;
-    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros, miExportaMacro, miExportaMicro;
+    private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros,miEditarVelocidade, miExportaMacro, miExportaMicro;
     
     
 	
@@ -129,9 +129,14 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         miEditarDemandaDeCarros.addActionListener(this);
         miEditarDemandaDeCarros.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.ALT_MASK));
         miEditarDemandaDeCarros.setMnemonic(KeyEvent.VK_D);
+        miEditarVelocidade = new JMenuItem("Velocidade", new ImageIcon("res/fluxo.png"));
+        miEditarVelocidade.addActionListener(this);
+        miEditarVelocidade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,ActionEvent.ALT_MASK));
+        miEditarVelocidade.setMnemonic(KeyEvent.VK_Q);
         menuEditar.add(miEditarFluxo);
         menuEditar.add(miEditarCapacidadeDaVia);
         menuEditar.add(miEditarDemandaDeCarros);
+        menuEditar.add(miEditarVelocidade);
         
         //Menu Opções
         menuOpcoes = new JMenu("Opcoes");
