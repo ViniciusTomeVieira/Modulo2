@@ -107,7 +107,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         menuEditar = new JMenu("Editar");
         menuEditar.setMnemonic(KeyEvent.VK_E);
         menuEditar.addActionListener(this);
-        menuEditar.setVisible(false);
+        menuEditar.setVisible(true);
         miEditarFluxo = new JMenuItem("Fluxo da via", new ImageIcon("res/fluxo.png"));
         miEditarFluxo.addActionListener(this);
         miEditarFluxo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,ActionEvent.ALT_MASK));
@@ -206,6 +206,14 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         }
         if(e.getSource()==miEditarVelocidade){
             mapView.alterarDados("Velocidade",JOptionPane.showInputDialog(rootPane,"Digite a nova velocidade da via:"));          
+        }
+        if(e.getSource()==miExportaMacro){
+            mapView.exportarMacro();
+            JOptionPane.showMessageDialog(rootPane,"Xml exportado para a area de trabalho");
+        }
+        if(e.getSource()==miExportaMicro){
+            mapView.exportarMicro();
+            JOptionPane.showMessageDialog(rootPane,"Xml exportado para a area de trabalho");
         }
     }
     

@@ -6,6 +6,8 @@
 package modulo2.view;
 
 import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -26,6 +28,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.metal.MetalIconFactory;
 import modulo2.model.saida.Connection;
 import modulo2.model.saida.Data;
 import modulo2.model.saida.Edge;
@@ -210,7 +213,7 @@ public class MapView extends JPanel {
             x/=xMedia;
             int diferenca = (int)difX;
             //System.out.println("Diferenca: " + diferenca);
-            this.x = (int)((int)x + (diferenca/2.9));
+            this.x = (int)((int)x + (diferenca/2.5));
         }else{
             //System.out.println("Caiu no maior: " + (x-xMedia));
             difX = (x-xMedia)*100000;
@@ -218,7 +221,7 @@ public class MapView extends JPanel {
             x/=xMedia;
             int diferenca = (int)difX;
             //System.out.println("Diferenca: " + diferenca);
-            this.x = (int)((int)x - (diferenca/2.6));
+            this.x = (int)((int)x - (diferenca/2.4));
         }
 
         if(y < yMedia){ //RESOLVIDO
@@ -228,7 +231,7 @@ public class MapView extends JPanel {
             y/=yMedia;
             int diferenca = (int)difY;
             //System.out.println("Diferenca: " + diferenca);
-            this.y = (int)((int)y - (diferenca/2));
+            this.y = (int)((int)y - (diferenca/1.8));
             
         }else{
             //System.out.println("Caiu no maior: " + (y-yMedia));
@@ -237,7 +240,7 @@ public class MapView extends JPanel {
             y/=yMedia;
             int diferenca = (int)difY;
             //System.out.println("Diferenca: " + diferenca);
-            this.y = (int)((int)y + (diferenca/2));
+            this.y = (int)((int)y + (diferenca/1.8));
         }
         
         
@@ -369,6 +372,16 @@ public class MapView extends JPanel {
             }
         }
          }
+    }
+
+    void exportarMacro() {
+         XStream xstream = new XStream(new DomDriver());
+         String xml = xstream.toXML(data);
+         
+    }
+
+    void exportarMicro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
