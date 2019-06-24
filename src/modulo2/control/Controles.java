@@ -72,8 +72,8 @@ public class Controles {
             data.setTypes(new Types());
 
             data = converterES.converterES(osm, data);
-            xml = xstream.toXML(data);
-            System.out.println(xml);
+//            xml = xstream.toXML(data);
+//            System.out.println(xml);
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GeradorXML.class.getName()).log(Level.SEVERE, null, ex);
