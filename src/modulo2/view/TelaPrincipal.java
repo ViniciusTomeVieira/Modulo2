@@ -27,6 +27,7 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modulo2.control.Controles;
 
+
 /**
  *
  * @author vinny
@@ -39,7 +40,6 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
     private JMenuItem miAbrir,miSair, miSalvar, miSalvarC, miSalvarT, miExcluir, miEditarFluxo, miEditarCapacidadeDaVia,miEditarDemandaDeCarros,miEditarVelocidade, miExportaMacro, miExportaMicro;
     
     
-	
 
     
     
@@ -51,20 +51,10 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
    
     
     
-     
-    
-    
-    public static void main(String[] args) {
-        JFrame janela = new TelaPrincipal();
-        janela.setUndecorated(false); // Tirar a decoração deafult da janela
-        //janela.getRootPane().setWindowDecorationStyle(JRootPane.FRAME); // Colocar uma nova decoração
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Saida clicando no "X"
-        janela.setVisible(true);
-        janela.setResizable(false);
-    }
+ 
 
     // Init components
-    TelaPrincipal(){
+   public TelaPrincipal(){
         
         //Configurações da tela principal
         setTitle("Modulo 2");
@@ -117,6 +107,7 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         menuEditar = new JMenu("Editar");
         menuEditar.setMnemonic(KeyEvent.VK_E);
         menuEditar.addActionListener(this);
+        menuEditar.setVisible(false);
         miEditarFluxo = new JMenuItem("Fluxo da via", new ImageIcon("res/fluxo.png"));
         miEditarFluxo.addActionListener(this);
         miEditarFluxo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,ActionEvent.ALT_MASK));
@@ -203,6 +194,10 @@ public class TelaPrincipal extends JFrame implements ActionListener,MouseWheelLi
         if(e.getSource() == miSair){
             JOptionPane.showMessageDialog(rootPane, "Saindo do sistema","Mensagem", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
+        }
+        if(e.getSource()==miEditarCapacidadeDaVia){
+            double  via = Double.parseDouble(JOptionPane.showInputDialog(rootPane,"Digite a nova capacidade da via:"));
+            
         }
     }
     

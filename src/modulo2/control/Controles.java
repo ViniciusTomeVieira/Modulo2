@@ -105,4 +105,10 @@ public class Controles {
         JOptionPane.showMessageDialog(null, "XML Micro");
     }
 
+    public Data getData() {
+        return data;
+    }
+    
+    
+
 }

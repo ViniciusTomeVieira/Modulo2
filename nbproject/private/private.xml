@@ -2,6 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/control/ConversorES.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/control/Controles.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Nodes.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/entrada/Nd.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Edges.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/entrada/Osm.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Edge.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/entrada/Way.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Data.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/view/main.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Node.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/view/TelaPrincipal.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/entrada/Node.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Connection.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/entrada/Bounds.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Connections.java</file>
+            <file>file:/C:/Users/Jogos/Documents/haru/Modulo2/src/modulo2/model/saida/Type.java</file>
+        </group>
     </open-files>
 </project-private>
