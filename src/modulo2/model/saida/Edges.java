@@ -17,6 +17,11 @@ public class Edges {
     @XStreamImplicit(itemFieldName = "edge")
     List<Edge> edge = new ArrayList<>();
 
+    public Edges() {
+    }
+
+
+
     public List<Edge> getEdge() {
         return edge;
     }

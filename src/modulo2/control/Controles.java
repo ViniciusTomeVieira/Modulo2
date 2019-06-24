@@ -25,8 +25,11 @@ import modulo2.model.entrada.Osm;
 import modulo2.model.entrada.Relation;
 import modulo2.model.entrada.Tag;
 import modulo2.model.entrada.Way;
+import modulo2.model.saida.Connections;
 import modulo2.model.saida.Data;
+import modulo2.model.saida.Edges;
 import modulo2.model.saida.Nodes;
+import modulo2.model.saida.Types;
 import principal.GeradorXML;
 
 /**
@@ -68,7 +71,11 @@ public class Controles {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GeradorXML.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(converterES.converterES(osm,data).toString());
+        data.setNodes(new Nodes());
+        data.setEdges(new Edges());
+        data.setConnections(new Connections());
+        data.setTypes(new Types());
+        
         data= converterES.converterES(osm,data);
     }
     

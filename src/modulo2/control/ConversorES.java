@@ -5,6 +5,8 @@
  */
 package modulo2.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import modulo2.model.entrada.*;
 import modulo2.model.entrada.Osm;
@@ -30,9 +32,9 @@ public class ConversorES {
     private String capacidade="";
     private String constA="";
     private String constB="";
-    private Data data;
     private Osm osm;
-            
+    private Data data;
+    private List<Data> dados= new ArrayList<>();
             
     private Random rs =new Random();
 
@@ -44,11 +46,11 @@ public class ConversorES {
         capacidade =gerarCapacidade();
         constA =geradordeConstanteA();
         constB =geradordeConstanteB();
-        this.data =data;
+        dados.add(data);
         this.osm=osm;
-
+        for(Data dados: dados){
         for (Node node : this.osm.getNode()) {
-            this.data.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
+            dados.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
         }
         for (Way way : this.osm.getWay()) {
             for (Nd nd : way.getNd()) {
@@ -63,19 +65,21 @@ public class ConversorES {
                         FimLon = Double.parseDouble(node.getLon());
                     }
                 }
-                this.data.getEdges().add(new Edge(way.getId(), way.getId(), nd.getRef(), speed, oneWay, numLanes, type, capacidade, constA,constB, iniLat, iniLon, FimLat, FimLon));
+                dados.getEdges().add(new Edge(way.getId(), way.getId(), nd.getRef(), speed, oneWay, numLanes, type, capacidade, constA,constB, iniLat, iniLon, FimLat, FimLon));
             }
         }
         for (Way way : this.osm.getWay()) {
-            this.data.getTypes().add(new Type(way.getId(), speed, oneWay, numLanes, capacidade));
+            dados.getTypes().add(new Type(way.getId(), speed, oneWay, numLanes, capacidade));
         }
 
         for (Node node : this.osm.getNode()) {
             for (Node node2 : this.osm.getNode()) {
-                this.data.getConnections().add(new Connection(node.getId(),node2.getId()));
+                dados.getConnections().add(new Connection(node.getId(),node2.getId()));
             }
         }
-        return this.data;
+        this.data=dados;
+        }
+        return data;
     }
         public String gerarCapacidade() {
         return String.valueOf(rs.nextInt(400));
