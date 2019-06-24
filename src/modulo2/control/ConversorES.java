@@ -25,6 +25,10 @@ public class ConversorES {
     private double iniLon;
     private double FimLat;
     private double FimLon;
+    private double xMax;
+    private double yMax;
+    private double xMin;
+    private double yMin;
     private String speed="";
     private String oneWay="";
     private String numLanes="";
@@ -46,9 +50,17 @@ public class ConversorES {
         capacidade =gerarCapacidade();
         constA =geradordeConstanteA();
         constB =geradordeConstanteB();
+        xMax = Double.parseDouble(osm.getBounds().getMaxlon());
+        yMax =Double.parseDouble(osm.getBounds().getMaxlat());
+        xMin = Double.parseDouble(osm.getBounds().getMinlon());
+        yMin =Double.parseDouble(osm.getBounds().getMinlat());
         dados.add(data);
         this.osm=osm;
         for(Data dados: dados){
+            dados.setxMax(xMax<0? xMax*-1:xMax);
+            dados.setyMax(yMax<0? yMax*-1:yMax);
+            dados.setxMin(xMin<0? xMin*-1: xMin);
+            dados.setyMin(yMin<0? yMin*-1: yMin);
         for (Node node : this.osm.getNode()) {
             dados.getNodes().addNode(new modulo2.model.saida.Node(node.getId(), Double.parseDouble(node.getLat()), Double.parseDouble(node.getLon())));
         }
