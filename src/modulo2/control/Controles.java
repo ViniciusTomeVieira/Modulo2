@@ -38,6 +38,7 @@ public class Controles {
     private ConversorES converterES;
     private Data data;
     public void geraObjeto(File file) {
+        converterES = new ConversorES();
         osm = Osm.getInstance();
         data = Data.getInstance();
         try {
@@ -67,6 +68,7 @@ public class Controles {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GeradorXML.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(converterES.converterES(osm,data).toString());
         data= converterES.converterES(osm,data);
     }
     
